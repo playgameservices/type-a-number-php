@@ -1,0 +1,7 @@
+.DS_Store
+/.idea/
+/server/google-api-php-client/
+/js/constants_fake.js
+/js/constants_real.js
+/PHPTypeNumber.iml
+/server/outside-your-htdocs-folder/AppConstants.ini
