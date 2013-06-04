@@ -104,25 +104,22 @@ steps:
 
 1. Get the latest [Google APIs Client Library for PHP](https://code.google.com/p/google-api-php-client/)
 and extract it into your `server` directory.
-    + We recommend you retrieve this using `svn`, to ensure you always have the
-    latest version.
-
-        svn checkout http://google-api-php-client.googlecode.com/svn/trunk/ google-api-php-client
-
-    + Alternately, you can get the gzip file from the downloads page.
-    Please make sure you download version 0.6.2 or later (updated June 3, 2013),
-    as the `GameService` contrib file does not exist in earlier versions.
+  + We recommend you retrieve this using `svn`, to ensure you always have the
+  latest version. (e.g. `svn checkout http://google-api-php-client.googlecode.com/svn/trunk/ google-api-php-client`)
+  + Alternately, you can get the gzip file from the downloads page.
+  Please make sure you download version 0.6.2 or later (updated June 3, 2013),
+  as the `GameService` contrib file does not exist in earlier versions.
 
 2. This application assumes you have PHP/MySQL already running on your server.
 Create a `users` table with the following setup:
 
-    CREATE TABLE IF NOT EXISTS `users` (
-      `temp_key` varchar(128) NOT NULL,
-      `user_id` varchar(64) NOT NULL,
-      `bearer_token` varchar(1024) NOT NULL,
-      `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      PRIMARY KEY (`user_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        CREATE TABLE IF NOT EXISTS `users` (
+          `temp_key` varchar(128) NOT NULL,
+          `user_id` varchar(64) NOT NULL,
+          `bearer_token` varchar(1024) NOT NULL,
+          `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+          PRIMARY KEY (`user_id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 3. Create your own application in the Play Console, as described in the [Create
   Client IDs](https://developers.google.com/games/partners/console/) portion of
