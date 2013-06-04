@@ -1,4 +1,4 @@
-# PHP Login Example
+# Game Services Sample Using PHP
 
 A sample application that demonstrates using some AJAX-y methods to sign in
 and make calls to Google Play games services from a server (in this case running
