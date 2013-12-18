@@ -22,21 +22,8 @@
 var login = login || {};
 
 
-login.userId = '';
 login.loggedIn = false;
-
-// We're asking for a response type of 'code' here, because we're going to
-// verify the user's identity on the server.
-login.responseType = 'code';
 login.tempKey = '';
-
-login.scopes = 'https://www.googleapis.com/auth/games';
-login.basePath = '/games/v1';
-
-login.init = function() {
-  // Need to add this 1 ms timeout to work around an odd but annoying bug
-  window.setTimeout(login.trySilentAuth, 1);
-};
 
 
 /**
@@ -80,38 +67,31 @@ login.serverLoginWithCode = function(code) {
  */
 login.handleAuthResult = function(auth) {
   console.log('We are in handle auth result', auth);
-  if (auth) {
+  if (auth && auth.error == null) {
     console.log('Hooray! We\'ve got a valid code');
     login.serverLoginWithCode(auth.code);
     $('#loginDiv').fadeOut();
-
     // We are going to silently sign-in again in 45 minutes, to ensure that the
     // user's token doesn't expire on the server.
-    setTimeout(login.trySilentAuth, 1000 * 60 * 45);
+    setTimeout(gapi.auth.signIn, 1000 * 60 * 45);
 
   } else {
+      if (auth && auth.hasOwnProperty('error')) {
+        console.log("Not signed in because: ", auth.error);
+      }
       $('#loginDiv').fadeIn();
   }
 };
 
 
 
-/**
- * Try to sign in silently first (works if you've authorized the app in the past)
- */
-login.trySilentAuth = function() {
-  console.log('Trying silent auth');
-  gapi.auth.authorize({client_id: constants.CLIENT_ID, response_type: login.responseType,
-    scope: login.scopes, immediate: true}, login.handleAuthResult);
-};
 
 /**
  * Sign in by showing the standard OAuth 2.0 dialog (required if you've never
  * signed in before, or scopes have changed)
  */
 login.showLoginDialog=function() {
-  gapi.auth.authorize({client_id: constants.CLIENT_ID, response_type: login.responseType,
-    scope: login.scopes, immediate: false}, login.handleAuthResult);
+  gapi.auth.signIn();
 };
 
 

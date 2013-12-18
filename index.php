@@ -39,6 +39,10 @@
   <meta charset="utf-8">
   <title></title>
   <link rel="stylesheet" href="css/main.css">
+  <meta name="google-signin-clientid" content="123456789012.apps.googleusercontent.com" />
+  <meta name="google-signin-cookiepolicy" content="single_host_origin" />
+  <meta name="google-signin-callback" content="signinCallback" />
+  <meta name="google-signin-scope" content="https://www.googleapis.com/auth/games" />
 </head>
 <body>
 <header>
@@ -81,11 +85,10 @@
 
 <!-- JavaScript at the bottom for fast page loading -->
 <script>
-  var apisLoaded = function() {
-    console.log("Ready to init");
-    login.init();
+  // This call is specified by the google-signin-callback in our meta tag
+  var signinCallback = function(auth) {
+    login.handleAuthResult(auth)
   };
-
   // This will change every time!
   var xstoken = "<?= $randomBit ?>";
 
@@ -101,7 +104,7 @@
 <script src="js/player.js"></script>
 <script src="js/utils.js"></script>
 
-<script src="https://apis.google.com/js/client.js?onload=apisLoaded"></script>
+<script src="https://apis.google.com/js/client.js"></script>
 
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
