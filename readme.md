@@ -206,3 +206,5 @@ the developer documentation.
 
 Thanks to Ian Barber for cleaning up the majority of our PHP code. Any remaining
 errors you find are probably mine.
+
+[![Analytics](https://ga-beacon.appspot.com/UA-46743168-1/playgameservices/type-a-number-php)](https://github.com/playgameservices/type-a-number-php)
